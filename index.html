@@ -1,1 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caleb Schroder - Class Portal</title>
+    <style>
+        /* Base styles */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --background-color: #f8f9fa;
+            --card-background: #ffffff;
+            --text-color: #333333;
+            --border-color: #e2e8f0;
+        }
 
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Layout structure */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            padding: 2.5rem 1rem;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+        }
+
+        header p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        section {
+            background: var(--card-background);
+            padding: 1.8rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Assignment Navigation List */
+        .assignment-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .assignment-list li {
+            margin-bottom: 0.75rem;
+        }
+
+        .assignment-list a {
+            display: block;
+            padding: 0.8rem 1rem;
+            background-color: var(--background-color);
+            color: var(--secondary-color);
+            text-decoration: none;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .assignment-list a:hover {
+            background-color: var(--secondary-color);
+            color: #ffffff;
+            border-color: var(--secondary-color);
+            transform: translateY(-1px);
+        }
+
+        footer {
+            text-align: center;
+            color: #718096;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Page Header -->
+        <header>
+            <!-- TODO: Replace with your name -->
+            <h1>Caleb Schroder</h1>
+            <p>Class Portal & Web Development Portfolio</p>
+        </header>
+
+        <!-- About Me Section -->
+        <section id="about">
+            <h2>About Me</h2>
+            <!-- TODO: Enter information about yourself here -->
+            <p>
+                Howdy! I am a senior finsihing up my degree in computer science and a minor in philosphy.
+            </p>
+            <p>
+                For hobbies I enjoy cycling, video games and reading.
+            </p>
+        </section>
+
+        <!-- Navigation / Coursework Section -->
+        <section id="assignments">
+            <h2>Assignments</h2>
+            <nav>
+                <ul class="assignment-list">
+                    <!-- TODO: Update href="#" with the actual path or URL to your assignment files (e.g., href="assignment1/index.html") -->
+                    <li>
+                        <a href="#">Assignment 1: [Project Title / Placeholder]</a>
+                    </li>
+                    <li>
+                        <a href="#">Assignment 2: [Project Title / Placeholder]</a>
+                    </li>
+                    <li>
+                        <a href="#">Assignment 3: [Project Title / Placeholder]</a>
+                    </li>
+                </ul>
+            </nav>
+        </section>
+
+        <!-- Page Footer -->
+        <footer>
+            <p>&copy; 2026 Caleb Schroder. All rights reserved.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
