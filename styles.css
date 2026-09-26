@@ -1,0 +1,310 @@
+/* ---------------------------------------------------
+   Pitaya (Dragon Fruit) — stylesheet
+   Palette drawn from the fruit itself:
+   magenta skin, white/red flesh, cactus green, black seed
+--------------------------------------------------- */
+
+:root {
+  --magenta: #c23b73;
+  --magenta-deep: #8e2354;
+  --flesh: #fdf3f7;
+  --flesh-deep: #f6dce8;
+  --leaf: #4c7a52;
+  --ink: #2b1520;
+  --ink-soft: #5c4452;
+  --paper: #fffbfd;
+  --max-w: 42rem;
+
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Screen-reader-only utility (do not remove) */
+.sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.sr-only:focus,
+a.sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0.5rem;
+  padding: 0.6rem 1rem;
+  clip: auto;
+  overflow: visible;
+  white-space: normal;
+  background: var(--magenta-deep);
+  color: #fff;
+  border-radius: 0.25rem;
+  z-index: 10;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 6.5rem; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* ---------- Header ---------- */
+
+.site-header {
+  background: linear-gradient(160deg, var(--magenta-deep), var(--magenta) 60%);
+  color: #fff;
+  padding: 2.5rem 1.5rem 0;
+}
+
+.header-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding-bottom: 1.75rem;
+}
+
+.site-header h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  margin: 0 0 0.35rem;
+  line-height: 1.1;
+}
+
+.site-header .subtitle {
+  display: block;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 0.5em;
+  color: var(--flesh-deep);
+  margin-top: 0.3rem;
+}
+
+.tagline {
+  max-width: 34rem;
+  font-size: 1.05rem;
+  color: var(--flesh-deep);
+  margin: 0;
+}
+
+.site-nav {
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.site-nav ul {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0.6rem 1.5rem;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.1rem;
+}
+
+.site-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 0.2rem 0;
+  border-bottom: 2px solid transparent;
+}
+
+.site-nav a:hover,
+.site-nav a:focus {
+  border-bottom-color: var(--flesh-deep);
+}
+
+/* ---------- Main / article ---------- */
+
+main {
+  display: block;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 1rem;
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.7rem;
+  color: var(--magenta-deep);
+  margin: 2.6rem 0 0.9rem;
+  padding-top: 0.6rem;
+  border-top: 3px solid var(--flesh-deep);
+}
+
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--ink);
+  margin: 1.8rem 0 0.6rem;
+}
+
+p { margin: 0 0 1rem; }
+
+p.lead {
+  font-size: 1.18rem;
+  color: var(--ink);
+}
+
+em { color: var(--magenta-deep); font-style: italic; }
+
+a { color: var(--magenta-deep); }
+a:hover, a:focus { color: var(--magenta); }
+
+/* Figures */
+
+figure {
+  margin: 1.6rem 0;
+}
+
+figure img {
+  border-radius: 4px;
+}
+
+figcaption {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  margin-top: 0.5rem;
+  line-height: 1.45;
+}
+
+.lead-figure { margin-top: 0; }
+
+/* Fact box aside */
+
+.fact-box {
+  background: var(--flesh);
+  border-left: 4px solid var(--leaf);
+  padding: 1rem 1.2rem;
+  margin: 1.5rem 0;
+  border-radius: 0 4px 4px 0;
+  font-size: 0.98rem;
+}
+
+.fact-box p { margin: 0; }
+
+/* Species definition list */
+
+.species-list dt {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--magenta-deep);
+  margin-top: 1rem;
+}
+
+.species-list dd {
+  margin: 0.2rem 0 0;
+}
+
+/* Table */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.2rem 0 1.5rem;
+  font-size: 0.95rem;
+}
+
+caption {
+  text-align: left;
+  font-weight: 600;
+  color: var(--ink-soft);
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.5rem 0.7rem;
+  border-bottom: 1px solid var(--flesh-deep);
+}
+
+thead th {
+  background: var(--flesh);
+  color: var(--magenta-deep);
+}
+
+tbody th { font-weight: 600; color: var(--ink); }
+
+/* Gallery */
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 1.2rem;
+}
+
+.gallery-grid figure { margin: 0; }
+
+.gallery-grid figcaption { font-size: 0.82rem; text-align: center; }
+
+/* Footer sections inside article */
+
+.article-footer {
+  margin-top: 2rem;
+  border-top: 3px solid var(--flesh-deep);
+}
+
+.article-footer h2 { border-top: none; padding-top: 0; }
+
+.references {
+  padding-left: 1.3rem;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+.references li { margin-bottom: 0.5rem; }
+
+.attribution {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+/* Site footer */
+
+.site-footer {
+  background: var(--ink);
+  color: var(--flesh-deep);
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.85rem;
+}
+
+.site-footer p { margin: 0; }
+
+/* Focus visibility for keyboard users */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--leaf);
+  outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* Small screens */
+@media (max-width: 30rem) {
+  .site-nav ul { gap: 0.3rem 0.8rem; }
+  h2 { font-size: 1.4rem; }
+}
