@@ -4,6 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tables</title>
+    <style>
+        table, th, td {
+            border-collapse:collapse;
+        }
+
+        td {
+            border-collapse: collapse;
+            border: 2px solid red;
+        }
+
+        td {
+            padding-right: 50px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -13,9 +27,26 @@
         <section>
             <h2>Lion table</h2>
             <table>
-
-
-                
+                <caption>Animals that can kill you</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">lions</th>
+                        <th scope="col">tigers</th>
+                        <th scope="col">bears</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>simba</td>
+                        <td>tigger</td>
+                        <td>winney</td>
+                    </tr>
+                    <tr>
+                        <td>cecil</td>
+                        <td>tygra</td>
+                        <td>baloo</td>
+                    </tr>
+                </tbody>
             </table>
         </section>
     </main>
