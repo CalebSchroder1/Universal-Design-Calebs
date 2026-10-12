@@ -23,6 +23,25 @@
                         what is your email?
                         <input type="email" id="email" required>
                     </label>
+                    <label for="website">
+                        what is your website
+                        <input type="url" id="website">
+                    </label>
+                    <label for="phone">
+                        what is your phone number?
+                        <input type="tel" id="phone" minlength="7">
+                    </label>
+                    <label for="age">
+                        how old are you?
+                        <input type="number" id="age">
+                    </label>
+                    <label for="password">
+                        what is your favorite password
+                        <input type="text" id="password" maxlength="20" minlength="5" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=*[@#$%^&+=!]).*" required>
+                    </label>
+                    <ul class="inputRequirements">
+                        <li>must be at least 5 characters and contain uppercase, lowercase, number and symbol</li>
+                    </ul>
                     <input type="submit">
                 </fieldset>
             </form>
