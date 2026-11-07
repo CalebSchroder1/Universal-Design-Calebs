@@ -8,20 +8,51 @@
         /* Base styles */
         :root {
             --primary-color: #2c3e50;
-            --secondary-color: #3498db;
+            --secondary-color: #1f5f99; /* darkened for 4.5:1+ contrast on light backgrounds */
             --background-color: #f8f9fa;
             --card-background: #ffffff;
             --text-color: #333333;
+            --muted-text-color: #4a5568;
             --border-color: #e2e8f0;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 1rem;
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--background-color);
             margin: 0;
             padding: 0;
+        }
+
+        /* Skip navigation link: hidden until focused */
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 1rem;
+            padding: 0.75rem 1rem;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            font-weight: 600;
+            border-radius: 0 0 6px 6px;
+            z-index: 100;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Visible keyboard focus for all interactive elements */
+        a:focus-visible {
+            outline: 3px solid var(--primary-color);
+            outline-offset: 2px;
         }
 
         /* Layout structure */
@@ -44,11 +75,11 @@
         header h1 {
             margin: 0 0 0.5rem 0;
             font-size: 2.2rem;
+            line-height: 1.2;
         }
 
         header p {
             margin: 0;
-            opacity: 0.9;
             font-size: 1.1rem;
         }
 
@@ -68,11 +99,53 @@
             padding-bottom: 0.5rem;
         }
 
+        /* About Me layout (flexbox): text and image sit side by side, stack on small screens */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .about-text {
+            flex: 1 1 300px;
+        }
+
+        .about-text p:first-child {
+            margin-top: 0;
+        }
+
+        .about-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        figure {
+            flex: 0 1 260px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        figcaption {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--muted-text-color);
+        }
+
         /* Assignment Navigation List */
         .assignment-list {
             list-style: none;
             padding: 0;
-            margin: 0;
+            margin: 0 0 2rem 0;
+        }
+
+        .assignment-list:last-child {
+            margin-bottom: 0;
         }
 
         .assignment-list li {
@@ -86,7 +159,7 @@
             color: var(--secondary-color);
             text-decoration: none;
             border-radius: 6px;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--secondary-color);
             font-weight: 500;
             transition: all 0.2s ease;
         }
@@ -100,13 +173,36 @@
 
         footer {
             text-align: center;
-            color: #718096;
+            color: var(--muted-text-color);
             font-size: 0.9rem;
             margin-top: 2rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            section {
+                padding: 1.2rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .assignment-list a {
+                transition: none;
+            }
+
+            .assignment-list a:hover {
+                transform: none;
+            }
         }
     </style>
 </head>
 <body>
+
+    <a class="skip-link" href="#main">Skip to main content</a>
 
     <div class="container">
         <!-- Page Header -->
@@ -115,56 +211,68 @@
             <p>Universal Design Class Website</p>
         </header>
 
-        <!-- About Me Section -->
-        <section id="about">
-            <h2>About Me</h2>
-            <p>
-                Howdy! I am a senior finishing up my degree in computer science and a minor in philosphy.
-            </p>
-            <p>
-                For hobbies I enjoy cycling, video games and reading.
-            </p>
-        </section>
+        <main id="main">
+            <!-- About Me Section -->
+            <section id="about" aria-labelledby="about-heading">
+                <h2 id="about-heading">About Me</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>
+                            Howdy! I am a senior finishing up my degree in computer science and a minor in philosophy. Stoked for this class and learning how to make my coding more accessible to everybody!
+                        </p>
+                        <p>
+                            For hobbies I enjoy cycling, video games and reading. I have lived in Colorado for most of my life and definitley call this state home. The outdoors and nature have always been a perfect combo for what I like to do, plus I am huge fan of the city of Denver and Boulder.
+                        </p>
+                    </div>
+                    <figure>
+                        <img src="images/IMG_4575.jpg" width="432" height="576"
+                            alt="an image of me">
+                        <figcaption>An image of me hiking.</figcaption>
+                    </figure>
+                </div>
+            </section>
 
-        <!-- Navigation / Coursework Section -->
-        <section id="assignments">
-            <h2>Assignments</h2>
-            <nav>
-                <ul class="assignment-list">
-                    <li>
-                        <a href="dragon-fruit.html">Assignment 1: Dragon Fruit Site</a>
-                    </li>
-                    <li>
-                        <a href="table-forms-tab-screenreader.html">Module 5 assignemnt: Tables, Forms, Tabbed Browsing, and Screen Reading</a>
-                    </li>
-                    <li>
-                        <a href="acessible-css-assigment.html">Module 6 assignment: acessible css</a>
-                    </li>
-                </ul>
-            </nav>
-            <h2>In class assignments</h2>
-            <nav>
-                <ul class="assignment-list">
-                    <li>
-                        <a href="semantic-legibility.html">legibility</a>
-                    </li>
-                    <li>
-                        <a href="semantic-Basics.html">basics</a>
-                    </li>
-                    <li>
-                        <a href="forms.html">forms</a>
-                    </li>
-                    <li>
-                        <a href="semantic-advanced.html">advanced</a>
-                    </li>
-                    <li>
-                        <a href="skip-nav-icons.html">skip-nav-icons</a>
-                    </li>
-                    <li>
-                        <a href="tables.html">tables</a>
-                    </li>
-            </nav>
-        </section>
+            <!-- Navigation / Coursework Section -->
+            <section id="assignments" aria-labelledby="assignments-heading">
+                <h2 id="assignments-heading">Assignments</h2>
+                <nav aria-label="Assignments">
+                    <ul class="assignment-list">
+                        <li>
+                            <a href="dragon-fruit.html">Lab 2: Dragon Fruit Site</a>
+                        </li>
+                        <li>
+                            <a href="table-forms-tab-screenreader.html">Lab 3: Tables, Forms, Tabbed Browsing, and Screen Reading</a>
+                        </li>
+                        <li>
+                            <a href="acessible-css-assigment.html">Lab 4: acessible css</a>
+                        </li>
+                    </ul>
+                </nav>
+                <h2 id="inclass-heading">In class work and more</h2>
+                <nav aria-labelledby="inclass-heading">
+                    <ul class="assignment-list">
+                        <li>
+                            <a href="semantic-legibility.html">legibility</a>
+                        </li>
+                        <li>
+                            <a href="semantic-Basics.html">basics</a>
+                        </li>
+                        <li>
+                            <a href="forms.html">forms</a>
+                        </li>
+                        <li>
+                            <a href="semantic-advanced.html">advanced</a>
+                        </li>
+                        <li>
+                            <a href="skip-nav-icons.html">skip-nav-icons</a>
+                        </li>
+                        <li>
+                            <a href="tables.html">tables</a>
+                        </li>
+                    </ul>
+                </nav>
+            </section>
+        </main>
 
         <!-- Page Footer -->
         <footer>
