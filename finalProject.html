@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Acessibility is Pretty Cool | Universal design for the web</title>
+  <meta name="description" content="A short guide to universal design for web developers and designers: why it matters, what it is, and how to build it.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&amp;family=Bricolage+Grotesque:wght@600;800&amp;display=swap">
+  <link rel="stylesheet" href="css/styles2.css">
+</head>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="finalProject.html">Acessibility is Pretty Cool</a>
+      <nav aria-label="Main">
+        <ul class="nav-list">
+          <li><a href="finalProject.html" aria-current="page">Home</a></li>
+          <li><a href="why.html">Why</a></li>
+          <li><a href="what.html">What</a></li>
+          <li><a href="how.html">How</a></li>
+          <li><a href="meta.html">Meta</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap">
+        <h1 id="hero-title">The web changes when people ask it to. Now it’s our turn.</h1>
+        <p class="lead">Every big shift in web design started as a grassroots push. Designers made CSS Zen Garden. Developers fought for web standards. Builders got HTML5 semantics. The next move is making information available to everyone, on every device, for every body and brain.</p>
+        <div class="btn-row">
+          <a class="btn" href="why.html">Start with why</a>
+          <a class="btn btn--ghost" href="how.html">Jump to the how-to</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tint" aria-labelledby="timeline-title">
+      <div class="wrap">
+        <h2 id="timeline-title">Every upgrade started with people</h2>
+        <p class="lead">None of these arrived because browsers felt generous. People organized, built examples, and kept asking.</p>
+        <ol class="timeline">
+          <li>
+            <p class="when">1998</p>
+            <h3>Web standards</h3>
+            <p>The code shift. The Web Standards Project pushed browsers to follow the same rules, so developers could stop building a different site for each browser.</p>
+          </li>
+          <li>
+            <p class="when">2003</p>
+            <h3>CSS Zen Garden</h3>
+            <p>The design shift. One HTML page, hundreds of looks. It proved that style could live in CSS and that CSS could be art.</p>
+          </li>
+          <li>
+            <p class="when">2014</p>
+            <h3>HTML5 semantics</h3>
+            <p>The content shift. Elements like <code>header</code>, <code>nav</code>, <code>main</code> and <code>article</code> gave pages meaning that software can read, not just pixels people can see.</p>
+          </li>
+          <li>
+            <p class="when">Now</p>
+            <h3>Universal design</h3>
+            <p>The access shift. Build it so the most people can use it, in the most situations, without a special version. This one is ours to start.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="paths-title">
+      <div class="wrap">
+        <h2 id="paths-title">Pick your path</h2>
+        <p class="lead">Three short pages. Read them in order or jump to what you need.</p>
+        <ul class="paths">
+          <li class="path path--why">
+            <h3><a href="why.html">Why bother?</a></h3>
+            <p>Spoiler: it isn’t a niche. Real numbers, the curb-cut effect, and the myths that hold teams back.</p>
+          </li>
+          <li class="path path--what">
+            <h3><a href="what.html">What is it?</a></h3>
+            <p>Seven principles, four WCAG ideas, and how universal design differs from accessibility.</p>
+          </li>
+          <li class="path path--how">
+            <h3><a href="how.html">How do I do it?</a></h3>
+            <p>Semantic HTML, contrast, keyboard support, forms and media, with code you can copy.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section--flush-top" aria-labelledby="challenge-title">
+      <div class="wrap">
+        <div class="callout">
+          <h2 id="challenge-title">Try this right now</h2>
+          <p>Put your mouse down and press <kbd>Tab</kbd>. Can you always see where you are? Can you reach every link and button? Can you finish what you came to do?</p>
+          <p>Now try it on the three sites you use most. Plenty of them fail this test, and it takes ten seconds.</p>
+          <a class="btn" href="why.html">See why it matters</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p><strong>Acessibility is Pretty Cool</strong> is a final project about improving the web</p>
+      <p><a href="#top">Back to top</a></p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,1030 @@
+/* ==========================================================================
+   Built For All: styles.css
+   Mobile first: base styles target small screens, then min-width media
+   queries (in em, so they respect the user's font size) add layout.
+   Themes: follows the device settings (light, dark, increased contrast).
+   No JavaScript anywhere: HTML and CSS only.
+   ========================================================================== */
+
+/* ---------- 1. Design tokens ---------- */
+:root {
+  color-scheme: light dark;
+
+  /* Light theme (default) */
+  --bg: #faf9ff;
+  --surface: #ffffff;
+  --ink: #17123a;
+  --muted: #46426b;
+  --accent: #4a2fd0;
+  --on-accent: #ffffff;
+  --sun: #ffd43b;
+  --on-sun: #17123a;
+  --tint-lilac: #e7e1ff;
+  --tint-mint: #c9f3e4;
+  --tint-sun: #fff0a8;
+  --code-bg: #efebff;
+  --line: #17123a;
+  --shadow: #17123a;
+  --focus: #4a2fd0;
+
+  /* Type */
+  --font-body: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Bricolage Grotesque", "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+
+  /* Shape */
+  --radius-card: 1.25rem;
+  --radius-box: 1rem;
+  --hard-shadow: 0.3rem 0.3rem 0 var(--shadow);
+}
+
+/* Dark theme: follows the device setting (no script needed) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #110d29;
+    --surface: #1b1640;
+    --ink: #f4f2ff;
+    --muted: #c9c4ec;
+    --accent: #bbaeff;
+    --on-accent: #110d29;
+    --tint-lilac: #2b2468;
+    --tint-mint: #0f3b33;
+    --tint-sun: #3d3405;
+    --code-bg: #0b0820;
+    --line: #bbaeff;
+    --shadow: #3e3780;
+    --focus: #ffd43b;
+  }
+}
+
+/* Increased contrast, light: follows the device "more contrast" setting */
+@media (prefers-contrast: more) {
+  :root {
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --ink: #000000;
+    --muted: #000000;
+    --accent: #2a0e9e;
+    --on-accent: #ffffff;
+    --on-sun: #000000;
+    --tint-lilac: #ffffff;
+    --tint-mint: #ffffff;
+    --tint-sun: #ffffff;
+    --code-bg: #ffffff;
+    --line: #000000;
+    --shadow: transparent;
+    --focus: #2a0e9e;
+  }
+}
+
+/* Increased contrast, dark */
+@media (prefers-contrast: more) and (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000000;
+    --surface: #000000;
+    --ink: #ffffff;
+    --muted: #ffffff;
+    --accent: #ffff4d;
+    --on-accent: #000000;
+    --sun: #ffff4d;
+    --on-sun: #000000;
+    --tint-lilac: #000000;
+    --tint-mint: #000000;
+    --tint-sun: #000000;
+    --code-bg: #000000;
+    --line: #ffffff;
+    --shadow: transparent;
+    --focus: #00e5ff;
+  }
+}
+
+/* ---------- 2. Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: 1rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+main:focus {
+  outline: none; /* main is only focused by the skip link, never a control */
+}
+
+[hidden] {
+  display: none !important;
+}
+
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.5em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.25rem, 1.4rem + 4.5vw, 4.5rem);
+  font-weight: 800;
+}
+
+h2 {
+  font-size: clamp(1.75rem, 1.3rem + 2vw, 2.75rem);
+  font-weight: 800;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+p,
+ul,
+ol,
+dl {
+  margin: 0 0 1em;
+}
+
+li {
+  margin-bottom: 0.35em;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 0.12em;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  text-decoration-thickness: 0.22em;
+}
+
+strong {
+  font-weight: 700;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* ---------- 3. Layout helpers ---------- */
+.wrap {
+  width: min(100% - 2rem, 72rem);
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.section--flush-top {
+  padding-top: 0;
+}
+
+.section--tint {
+  background: var(--tint-lilac);
+  border-block: 2px solid var(--line);
+}
+
+.prose {
+  max-width: 65ch;
+}
+
+.lead {
+  font-size: 1.25rem;
+  max-width: 60ch;
+}
+
+/* ---------- 4. Skip link ---------- */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -5rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: var(--sun);
+  color: var(--on-sun);
+  font-weight: 700;
+  border: 2px solid var(--line);
+  border-radius: 0.5rem;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* ---------- 5. Header, navigation, comfort settings ---------- */
+.site-header {
+  background: var(--surface);
+  border-bottom: 2px solid var(--line);
+}
+
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.5rem;
+  padding-block: 0.75rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.brand::before {
+  content: "";
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-right: 1.1rem;
+  border: 2px solid var(--line);
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0.65rem 0 0 var(--sun);
+}
+
+.nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-list li {
+  margin: 0;
+}
+
+.nav-list a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0.25rem 0.9rem;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.nav-list a:hover {
+  border-color: var(--line);
+}
+
+.nav-list a[aria-current="page"] {
+  background: var(--sun);
+  color: var(--on-sun);
+  border-color: var(--line);
+  text-decoration: underline;
+  text-decoration-thickness: 0.12em;
+  text-underline-offset: 0.2em;
+}
+
+@media (min-width: 48em) {
+  .header-inner {
+    flex-wrap: nowrap;
+  }
+
+  .header-inner nav {
+    margin-left: auto;
+  }
+}
+
+/* ---------- 6. Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.5rem 1.5rem;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0.25rem 0.25rem 0 var(--shadow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn:hover {
+  transform: translate(-0.1rem, -0.1rem);
+  box-shadow: 0.35rem 0.35rem 0 var(--shadow);
+}
+
+.btn:active {
+  transform: translate(0.15rem, 0.15rem);
+  box-shadow: 0 0 0 var(--shadow);
+}
+
+.btn--ghost {
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* ---------- 7. Home page ---------- */
+.hero {
+  padding-block: clamp(2.5rem, 8vw, 6rem) clamp(2rem, 5vw, 3.5rem);
+}
+
+.hero h1 {
+  max-width: 20ch;
+}
+
+.timeline {
+  display: grid;
+  gap: 1.25rem;
+  margin: 2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.timeline li {
+  margin: 0;
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--hard-shadow);
+}
+
+.timeline li:last-child {
+  background: var(--sun);
+  color: var(--on-sun);
+}
+
+.timeline .when {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.timeline h3 {
+  margin-bottom: 0.4rem;
+}
+
+.timeline p:last-child {
+  margin-bottom: 0;
+}
+
+.paths {
+  display: grid;
+  gap: 1.25rem;
+  margin: 2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.path {
+  position: relative;
+  margin: 0;
+  padding: 1.5rem;
+  border: 2px solid var(--line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--hard-shadow);
+  color: var(--ink);
+}
+
+.path--why {
+  background: var(--tint-sun);
+}
+
+.path--what {
+  background: var(--tint-mint);
+}
+
+.path--how {
+  background: var(--tint-lilac);
+}
+
+.path h3 {
+  font-size: 1.75rem;
+}
+
+.path a {
+  color: inherit;
+}
+
+/* Make the whole card clickable; show the focus ring around the card */
+.path a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-card);
+}
+
+.path a:focus-visible {
+  outline: none;
+}
+
+.path a:focus-visible::after {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+@media (min-width: 40em) {
+  .timeline {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 48em) {
+  .paths {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 64em) {
+  .timeline {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ---------- 8. Content pages ---------- */
+.page-head {
+  padding-block: clamp(2rem, 6vw, 4rem) 1.5rem;
+}
+
+.page-head h1 {
+  max-width: 18ch;
+}
+
+.page-grid {
+  display: grid;
+  gap: 2rem;
+  padding-block: 1rem 4rem;
+}
+
+.toc {
+  padding: 1rem 1.25rem;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-box);
+}
+
+.toc h2 {
+  margin-bottom: 0.6rem;
+  font-size: 1.125rem;
+}
+
+.toc ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.toc li {
+  margin: 0;
+}
+
+.toc a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0.2rem 0.9rem;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.toc a:hover {
+  background: var(--sun);
+  color: var(--on-sun);
+}
+
+.content > section + section {
+  margin-top: 3.5rem;
+}
+
+.content h2 {
+  scroll-margin-top: 1rem;
+}
+
+@media (min-width: 60em) {
+  .page-grid {
+    grid-template-columns: 15rem minmax(0, 1fr);
+    gap: 3rem;
+  }
+
+  .toc {
+    align-self: start;
+  }
+
+  .toc ul {
+    display: block;
+  }
+
+  .toc a {
+    display: flex;
+    border: 0;
+    border-radius: 0.5rem;
+    background: transparent;
+    padding: 0.3rem 0.5rem;
+    margin-inline: -0.5rem;
+  }
+}
+
+@media (min-width: 60em) and (min-height: 36em) {
+  .toc {
+    position: sticky;
+    top: 1rem;
+  }
+}
+
+/* ---------- 9. Components ---------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.card {
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-box);
+}
+
+.card h3,
+.card h4 {
+  font-size: 1.35rem;
+}
+
+.card ul {
+  padding-left: 1.2rem;
+  margin-bottom: 0;
+}
+
+.card--lilac {
+  background: var(--tint-lilac);
+}
+
+.card--mint {
+  background: var(--tint-mint);
+}
+
+.card--sun {
+  background: var(--tint-sun);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: 1.25rem;
+  margin: 1.5rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stats li {
+  margin: 0;
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--hard-shadow);
+}
+
+.stat-num {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-family: var(--font-display);
+  font-size: 2.75rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.callout {
+  margin-block: 2rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--tint-sun);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--hard-shadow);
+}
+
+.callout > :last-child {
+  margin-bottom: 0;
+}
+
+.callout h2,
+.callout h3 {
+  font-size: 1.5rem;
+}
+
+.def-list dt {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.def-list dd {
+  margin: 0 0 1.25rem;
+}
+
+.principles {
+  margin: 1.5rem 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: principle;
+  display: grid;
+  gap: 1rem;
+}
+
+.principles li {
+  position: relative;
+  margin: 0;
+  padding: 1.25rem 1.25rem 1.25rem 4rem;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-box);
+  counter-increment: principle;
+}
+
+.principles li::before {
+  content: counter(principle);
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border: 2px solid var(--line);
+  border-radius: 50%;
+  background: var(--sun);
+  color: var(--on-sun);
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+
+.principles h3 {
+  margin-bottom: 0.25rem;
+  font-size: 1.3rem;
+}
+
+.principles p {
+  margin-bottom: 0;
+}
+
+/* Accordions: native details/summary, no script needed */
+.accordion details {
+  margin-bottom: 0.75rem;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-box);
+}
+
+.accordion summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 3rem;
+  padding: 0.6rem 1.25rem;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+}
+
+.accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.accordion summary:hover {
+  background: var(--tint-lilac);
+  border-radius: calc(var(--radius-box) - 2px);
+}
+
+.accordion details[open] > summary {
+  margin-bottom: 0.75rem;
+  border-bottom: 2px solid var(--line);
+  border-radius: calc(var(--radius-box) - 2px) calc(var(--radius-box) - 2px) 0 0;
+}
+
+.accordion summary::after {
+  content: "+";
+  content: "+" / "";
+  flex: none;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.accordion details[open] summary::after {
+  content: "\2212";
+  content: "\2212" / "";
+}
+
+.accordion details > div {
+  padding: 0 1.25rem 1rem;
+}
+
+.accordion details > div > :last-child {
+  margin-bottom: 0;
+}
+
+/* Code */
+pre {
+  margin: 0 0 1.25rem;
+  padding: 1rem;
+  overflow-x: auto;
+  background: var(--code-bg);
+  border: 2px solid var(--line);
+  border-radius: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  tab-size: 2;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+:not(pre) > code {
+  padding: 0.1em 0.35em;
+  background: var(--code-bg);
+  border-radius: 0.3em;
+}
+
+kbd {
+  display: inline-block;
+  padding: 0.05em 0.45em;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: 0.4em;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  line-height: 1.4;
+}
+
+figure {
+  margin: 0 0 1.25rem;
+}
+
+figcaption {
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+
+.compare {
+  display: grid;
+  gap: 0 1.25rem;
+}
+
+@media (min-width: 48em) {
+  .compare {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Checklist */
+.checklist {
+  margin: 1.5rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.checklist li {
+  margin-bottom: 0.6rem;
+}
+
+.checklist label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  min-height: 2.75rem;
+  padding: 0.6rem 0.9rem;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: 0.75rem;
+  cursor: pointer;
+}
+
+.checklist input {
+  flex: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0.1rem 0 0;
+  accent-color: var(--accent);
+}
+
+.checklist label:has(input:checked) {
+  background: var(--tint-mint);
+}
+
+/* Tables */
+.table-wrap {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: 0.75rem;
+}
+
+table {
+  width: 100%;
+  min-width: 34rem;
+  border-collapse: collapse;
+}
+
+caption {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 700;
+}
+
+th,
+td {
+  padding: 0.7rem 1rem;
+  text-align: left;
+  vertical-align: top;
+  border-top: 2px solid var(--line);
+}
+
+thead th {
+  background: var(--tint-lilac);
+}
+
+/* Palette chips on the Meta page */
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.swatches li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0.6rem;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: 0.75rem;
+}
+
+.chip {
+  flex: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 2px solid var(--line);
+  border-radius: 50%;
+}
+
+.sw-bg { background: #faf9ff; }
+.sw-ink { background: #17123a; }
+.sw-accent { background: #4a2fd0; }
+.sw-sun { background: #ffd43b; }
+.sw-lilac { background: #e7e1ff; }
+.sw-mint { background: #c9f3e4; }
+
+/* Previous / next links */
+.next-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 3.5rem;
+}
+
+/* ---------- 10. Footer ---------- */
+.site-footer {
+  margin-top: auto;
+  padding-block: 2rem;
+  background: var(--surface);
+  border-top: 2px solid var(--line);
+  font-size: 1rem;
+}
+
+.footer-inner {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.footer-inner p {
+  margin: 0;
+}
+
+/* ---------- 11. Visitor preferences ---------- */
+
+/* Respect reduced motion: no transitions or animation */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Windows high contrast / forced colors: keep borders and focus visible */
+@media (forced-colors: active) {
+  .btn,
+  .nav-list a,
+  .skip-link,
+  .toc a {
+    border: 2px solid ButtonText;
+  }
+
+  :focus-visible {
+    outline-color: Highlight;
+  }
+
+  .path a:focus-visible::after {
+    outline-color: Highlight;
+  }
+}
+
+/* Print: plain and ink-friendly */
+@media print {
+  .skip-link,
+  .toc,
+  .next-links {
+    display: none !important;
+  }
+
+  /* show the contents of closed accordions when printing */
+  details::details-content {
+    content-visibility: visible;
+    display: block;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 12pt;
+  }
+
+  a {
+    color: #000;
+  }
+}

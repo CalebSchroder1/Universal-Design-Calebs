@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How to build universally designed sites | Built For All</title>
+  <meta name="description" content="A practical guide to accessible, universally designed websites: semantic HTML, contrast and type, keyboard support, forms and media, and user preferences.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&amp;family=Bricolage+Grotesque:wght@600;800&amp;display=swap">
+  <link rel="stylesheet" href="css/styles2.css">
+</head>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="finalProject.html">Built For All</a>
+      <nav aria-label="Main">
+        <ul class="nav-list">
+          <li><a href="finalProject.html">Home</a></li>
+          <li><a href="why.html">Why</a></li>
+          <li><a href="what.html">What</a></li>
+          <li><a href="how.html" aria-current="page">How</a></li>
+          <li><a href="meta.html">Meta</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <div class="wrap">
+      <div class="page-head">
+        <h1>How to build it</h1>
+        <p>Good news: most of this is plain HTML and CSS you already know. Here’s the short list that fixes the problems audits find again and again.</p>
+      </div>
+
+      <div class="page-grid">
+        <nav class="toc" aria-label="On this page">
+          <h2>On this page</h2>
+          <ul>
+            <li><a href="#blocks">Five building blocks</a></li>
+            <li><a href="#aria">A word on ARIA</a></li>
+            <li><a href="#checklist">Quick check</a></li>
+            <li><a href="#resources">Keep going</a></li>
+          </ul>
+        </nav>
+
+        <div class="content">
+          <section id="blocks" aria-labelledby="blocks-title">
+            <h2 id="blocks-title">Five building blocks</h2>
+            <p class="prose">Open a topic to read it. Everything works from the keyboard: press <kbd>Tab</kbd> to reach a heading, then <kbd>Enter</kbd> or <kbd>Space</kbd> to open it. In most browsers only one stays open at a time.</p>
+
+            <div class="accordion">
+              <details name="blocks" open>
+                <summary>Structure: start with semantic HTML</summary>
+                <div>
+                  <p>Use each element for what it means. Browsers give you keyboard support, focus, and screen reader roles for free.</p>
+                  <ul>
+                    <li>Landmarks: <code>header</code>, <code>nav</code>, <code>main</code>, <code>footer</code>. Screen reader users jump between them.</li>
+                    <li>One <code>h1</code> per page, then headings in order. Pick levels for structure, not for size.</li>
+                    <li>Real lists for lists. Real tables for data.</li>
+                    <li>Links go places. Buttons do things.</li>
+                    <li>Set <code>lang</code> on <code>html</code> and give every page a unique <code>title</code>.</li>
+                  </ul>
+                  <div class="compare">
+                    <figure>
+                      <figcaption>Instead of this</figcaption>
+                      <pre tabindex="0"><code>&lt;div class="btn" onclick="save()"&gt;
+  Save
+&lt;/div&gt;</code></pre>
+                    </figure>
+                    <figure>
+                      <figcaption>Do this</figcaption>
+                      <pre tabindex="0"><code>&lt;button type="button" id="save"&gt;
+  Save
+&lt;/button&gt;</code></pre>
+                    </figure>
+                  </div>
+                  <figure>
+                    <figcaption>A page skeleton that gets the basics right</figcaption>
+                    <pre tabindex="0"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+  &lt;title&gt;Page topic | Site name&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;a href="#main"&gt;Skip to main content&lt;/a&gt;
+  &lt;header&gt;
+    &lt;nav aria-label="Main"&gt;…&lt;/nav&gt;
+  &lt;/header&gt;
+  &lt;main id="main"&gt;
+    &lt;h1&gt;One clear page heading&lt;/h1&gt;
+  &lt;/main&gt;
+  &lt;footer&gt;…&lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                  </figure>
+                </div>
+              </details>
+
+              <details name="blocks">
+                <summary>Color and type: readable first, pretty second</summary>
+                <div>
+                  <ul>
+                    <li><strong>Contrast:</strong> at least 4.5:1 for normal text, and 3:1 for large text and for UI parts like input borders and meaningful icons.</li>
+                    <li><strong>Don’t rely on color alone.</strong> Underline links. Pair error colors with words or icons.</li>
+                    <li><strong>Relative units:</strong> size type in <code>rem</code> so it scales with people’s browser settings.</li>
+                    <li><strong>Comfortable text:</strong> line height around 1.5, and lines of roughly 45 to 75 characters (<code>max-width: 65ch</code>).</li>
+                    <li><strong>Reflow:</strong> nothing should need sideways scrolling at 320 CSS pixels wide. That’s what 400% zoom looks like on a laptop.</li>
+                    <li><strong>Target size:</strong> at least 24 by 24 CSS pixels (WCAG 2.2 AA). Aim for 44 by 44.</li>
+                  </ul>
+                  <figure>
+                    <figcaption>Mobile-first CSS: small screens first, then add layout as space allows</figcaption>
+                    <pre tabindex="0"><code>/* base styles are for small screens */
+.cards {
+  display: grid;
+  gap: 1rem;
+}
+
+/* use em in media queries so they follow the user's font size */
+@media (min-width: 40em) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}</code></pre>
+                  </figure>
+                </div>
+              </details>
+
+              <details name="blocks">
+                <summary>Keyboard and focus: if you can’t Tab to it, it’s broken</summary>
+                <div>
+                  <p>Plenty of people never touch a mouse. Every control must be reachable and usable with <kbd>Tab</kbd>, <kbd>Shift</kbd>+<kbd>Tab</kbd>, <kbd>Enter</kbd>, <kbd>Space</kbd>, arrow keys inside widgets, and <kbd>Esc</kbd> to close things.</p>
+                  <ul>
+                    <li>Never remove the focus outline without replacing it with something just as visible.</li>
+                    <li>Keep the DOM order the same as the visual order.</li>
+                    <li>Don’t use <code>tabindex</code> above 0. Use <code>0</code> for custom widgets and <code>-1</code> for focus set by script.</li>
+                    <li>Add a skip link so people can jump past the navigation.</li>
+                    <li>Never trap focus. People must always be able to leave.</li>
+                  </ul>
+                  <figure>
+                    <figcaption>A visible focus style</figcaption>
+                    <pre tabindex="0"><code>:focus-visible {
+  outline: 3px solid #4a2fd0;
+  outline-offset: 3px;
+}</code></pre>
+                  </figure>
+                  <figure>
+                    <figcaption>A skip link: first thing in the body, visible when focused</figcaption>
+                    <pre tabindex="0"><code>&lt;a class="skip-link" href="#main"&gt;Skip to main content&lt;/a&gt;
+
+.skip-link { position: absolute; top: -5rem; }
+.skip-link:focus { top: 1rem; }</code></pre>
+                  </figure>
+                  <p>Try it: unplug your mouse and use this page.</p>
+                </div>
+              </details>
+
+              <details name="blocks">
+                <summary>Media and forms: give everything a name</summary>
+                <div>
+                  <ul>
+                    <li><strong>Images:</strong> describe what the image is for, not “image of”. Decorative images get <code>alt=""</code> so screen readers skip them.</li>
+                    <li><strong>Video and audio:</strong> captions and a transcript. No autoplay with sound.</li>
+                    <li><strong>Form fields:</strong> every input gets a visible <code>label</code>. A placeholder is not a label because it disappears when you type.</li>
+                    <li><strong>Errors:</strong> say what went wrong and how to fix it, in text, next to the field.</li>
+                    <li><strong>Autofill:</strong> use <code>autocomplete</code> so people type less.</li>
+                  </ul>
+                  <figure>
+                    <figcaption>Informative and decorative images</figcaption>
+                    <pre tabindex="0"><code>&lt;img src="chart.png"
+     alt="Bar chart: 95.9% of home pages had WCAG failures in 2026"&gt;
+
+&lt;img src="swirl.svg" alt=""&gt;</code></pre>
+                  </figure>
+                  <figure>
+                    <figcaption>A labelled field with a hint</figcaption>
+                    <pre tabindex="0"><code>&lt;label for="email"&gt;Email&lt;/label&gt;
+&lt;input id="email" name="email" type="email"
+       autocomplete="email"
+       aria-describedby="email-hint"&gt;
+&lt;p id="email-hint"&gt;We only use this to send your receipt.&lt;/p&gt;</code></pre>
+                  </figure>
+                </div>
+              </details>
+
+              <details name="blocks">
+                <summary>Preferences: respect what people told their device</summary>
+                <div>
+                  <p>Operating systems and browsers let people say what they need. CSS can listen.</p>
+                  <ul>
+                    <li><code>prefers-reduced-motion</code> for people who get dizzy or distracted by animation.</li>
+                    <li><code>prefers-color-scheme</code> for light and dark.</li>
+                    <li><code>prefers-contrast</code> and <code>forced-colors</code> for high-contrast modes.</li>
+                    <li>Never disable zoom with <code>user-scalable=no</code>, and don’t lock the screen orientation.</li>
+                  </ul>
+                  <figure>
+                    <figcaption>Three preference queries</figcaption>
+                    <pre tabindex="0"><code>@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #110d29; --ink: #f4f2ff; }
+}
+
+@media (forced-colors: active) {
+  .btn { border: 2px solid ButtonText; }
+}</code></pre>
+                  </figure>
+                  <p>This site follows your device. Switch your system to dark mode, or turn on increased contrast, and the page updates right away.</p>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <section id="aria" aria-labelledby="aria-title">
+            <h2 id="aria-title">A word on ARIA</h2>
+            <p class="prose">ARIA adds extra meaning for assistive technology, but the first rule is: if a native HTML element does the job, use it. A real <code>button</code> beats <code>div role="button"</code> every time, because the real one already handles focus, Enter, and Space.</p>
+            <p class="prose">WebAIM’s 2025 analysis found that home pages using ARIA had more than twice as many detected errors on average as pages without it. That doesn’t mean ARIA causes errors. It does mean it’s easy to use wrongly. Reach for it last, and test it.</p>
+          </section>
+
+          <section id="checklist" aria-labelledby="checklist-title">
+            <h2 id="checklist-title">Your quick check</h2>
+            <p class="prose">Run this on anything you build. (These boxes are just for you and aren’t saved.)</p>
+            <ul class="checklist">
+              <li><label><input type="checkbox"><span>I can reach and use everything with only the keyboard.</span></label></li>
+              <li><label><input type="checkbox"><span>I can always see where focus is.</span></label></li>
+              <li><label><input type="checkbox"><span>Text passes 4.5:1 contrast, and large text and UI parts pass 3:1.</span></label></li>
+              <li><label><input type="checkbox"><span>Every image has useful alt text, or <code>alt=""</code> if it’s decorative.</span></label></li>
+              <li><label><input type="checkbox"><span>Every form field has a visible label.</span></label></li>
+              <li><label><input type="checkbox"><span>There’s one <code>h1</code>, and headings go in order.</span></label></li>
+              <li><label><input type="checkbox"><span>It works at 320 pixels wide and at 200% zoom without sideways scrolling.</span></label></li>
+              <li><label><input type="checkbox"><span>It still works with a screen reader and with motion and color settings changed.</span></label></li>
+            </ul>
+            <p class="prose">See how this site did on its own checks on the <a href="meta.html">Meta page</a>.</p>
+          </section>
+
+          <section id="resources" aria-labelledby="resources-title">
+            <h2 id="resources-title">Keep going</h2>
+            <ul class="prose">
+              <li><a href="https://www.w3.org/TR/WCAG22/">WCAG 2.2</a>, the full standard</li>
+              <li><a href="https://www.w3.org/WAI/fundamentals/accessibility-intro/">W3C WAI: Introduction to web accessibility</a></li>
+              <li><a href="https://webaim.org/">WebAIM</a>, guides and articles</li>
+              <li><a href="https://www.a11yproject.com/">The A11Y Project</a>, community checklist and posts</li>
+              <li><a href="https://wave.webaim.org/">WAVE</a>, <a href="https://validator.w3.org/">W3C Markup Validator</a>, and <a href="https://www.deque.com/axe/">axe</a>, free checking tools</li>
+            </ul>
+          </section>
+
+          <div class="next-links">
+            <a class="btn btn--ghost" href="what.html">Back: What it is</a>
+            <a class="btn" href="meta.html">Next: How this site was built</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p><strong>Built For All</strong> is a class project about universal design for the web.</p>
+      <p>Type: Atkinson Hyperlegible and Bricolage Grotesque, via Google Fonts.</p>
+      <p><a href="#top">Back to top</a></p>
+    </div>
+  </footer>
+</body>
+</html>

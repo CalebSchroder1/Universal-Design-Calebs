@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Meta: how this site was built | Built For All</title>
+  <meta name="description" content="How Built For All practices what it preaches: mobile-first CSS, an accessible palette with measured contrast ratios, built-in accessibility features, and a test log.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&amp;family=Bricolage+Grotesque:wght@600;800&amp;display=swap">
+  <link rel="stylesheet" href="css/styles2.css">
+</head>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="finalProject.html">Built For All</a>
+      <nav aria-label="Main">
+        <ul class="nav-list">
+          <li><a href="finalProject.html">Home</a></li>
+          <li><a href="why.html">Why</a></li>
+          <li><a href="what.html">What</a></li>
+          <li><a href="how.html">How</a></li>
+          <li><a href="meta.html" aria-current="page">Meta</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <div class="wrap">
+      <div class="page-head">
+        <h1>Meta: this site has to follow its own advice</h1>
+        <p>A site about universal design that isn’t universally designed would be a bad joke. Here’s how this one is built and how it was checked.</p>
+      </div>
+
+      <div class="page-grid">
+        <nav class="toc" aria-label="On this page">
+          <h2>On this page</h2>
+          <ul>
+            <li><a href="#mobile-first">Mobile first</a></li>
+            <li><a href="#look">The look</a></li>
+            <li><a href="#features">Built-in features</a></li>
+            <li><a href="#contrast">Contrast results</a></li>
+            <li><a href="#testing">Test log</a></li>
+          </ul>
+        </nav>
+
+        <div class="content">
+          <section id="mobile-first" aria-labelledby="mobile-first-title">
+            <h2 id="mobile-first-title">Mobile first, then responsive</h2>
+            <p class="prose">The styles in <code>styles.css</code> were written for a narrow phone screen first (about 320 pixels). Wider layouts are added with <code>min-width</code> media queries written in <code>em</code>, so they follow the visitor’s font size. Grids use <code>repeat(auto-fit, minmax(…))</code> so cards wrap by themselves, and flexbox handles the navigation and button rows.</p>
+            <p class="prose">There’s no horizontal scrolling at 320 pixels except inside code blocks and tables, which scroll within their own box and can be reached with the keyboard.</p>
+          </section>
+
+          <section id="look" aria-labelledby="look-title">
+            <h2 id="look-title">The look</h2>
+            <p class="prose">The style is a sticker-pack look: chunky ink outlines, hard offset shadows, and flat color. It’s playful, but the structure stays calm so the content comes first.</p>
+            <ul class="prose">
+              <li><strong>Body type:</strong> Atkinson Hyperlegible, a typeface designed by the Braille Institute so letters are easy to tell apart.</li>
+              <li><strong>Headings:</strong> Bricolage Grotesque, a friendly, slightly quirky grotesque.</li>
+              <li><strong>Code:</strong> the system’s monospace font.</li>
+              <li><strong>Color:</strong> an ink-blue text color, one violet accent, and a yellow marker, plus three soft tints.</li>
+            </ul>
+            <ul class="swatches">
+              <li><span class="chip sw-bg"></span><span>Page <code>#FAF9FF</code></span></li>
+              <li><span class="chip sw-ink"></span><span>Ink <code>#17123A</code></span></li>
+              <li><span class="chip sw-accent"></span><span>Accent <code>#4A2FD0</code></span></li>
+              <li><span class="chip sw-sun"></span><span>Marker <code>#FFD43B</code></span></li>
+              <li><span class="chip sw-lilac"></span><span>Lilac <code>#E7E1FF</code></span></li>
+              <li><span class="chip sw-mint"></span><span>Mint <code>#C9F3E4</code></span></li>
+            </ul>
+          </section>
+
+          <section id="features" aria-labelledby="features-title">
+            <h2 id="features-title">Built-in accessibility features</h2>
+            <ul class="prose">
+              <li>A skip link is the first thing you reach with the keyboard.</li>
+              <li>Landmarks (<code>header</code>, <code>nav</code>, <code>main</code>, <code>footer</code>), one <code>h1</code> per page, and headings in order.</li>
+              <li>The current page is marked with <code>aria-current="page"</code> and with a fill and underline, not just color.</li>
+              <li>A thick focus ring on every control, and the nav, buttons, and settings are at least 44 pixels tall.</li>
+              <li>There is no JavaScript at all. Every feature is plain HTML and CSS.</li>
+              <li>The building blocks on the How page and the myths on the Why page use native <code>details</code> and <code>summary</code>. They open with <kbd>Enter</kbd> or <kbd>Space</kbd> and need no ARIA.</li>
+              <li>The site follows your device’s light or dark setting and its increased-contrast setting, so people don’t have to hunt for a theme switch.</li>
+              <li>Motion is off when you ask for reduced motion, and forced-colors mode keeps borders and focus visible.</li>
+              <li>Zoom is never disabled, and all text is sized in <code>rem</code>.</li>
+            </ul>
+          </section>
+
+          <section id="contrast" aria-labelledby="contrast-title">
+            <h2 id="contrast-title">Contrast results</h2>
+            <p class="prose">These ratios were calculated with the WCAG formula for the colors this stylesheet uses. AA needs 4.5:1 for normal text and 3:1 for large text and UI parts.</p>
+            <div class="table-wrap" role="region" aria-labelledby="contrast-caption" tabindex="0">
+              <table>
+                <caption id="contrast-caption">Contrast ratios by theme</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Pair</th>
+                    <th scope="col">Light</th>
+                    <th scope="col">Dark</th>
+                    <th scope="col">More contrast (light)</th>
+                    <th scope="col">More contrast (dark)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">Body text on page</th><td>16.94:1</td><td>17.06:1</td><td>21.00:1</td><td>21.00:1</td></tr>
+                  <tr><th scope="row">Muted text on page</th><td>8.91:1</td><td>11.31:1</td><td>21.00:1</td><td>21.00:1</td></tr>
+                  <tr><th scope="row">Links on page</th><td>7.69:1</td><td>9.53:1</td><td>12.69:1</td><td>19.66:1</td></tr>
+                  <tr><th scope="row">Button text on button</th><td>8.05:1</td><td>9.53:1</td><td>12.69:1</td><td>19.66:1</td></tr>
+                  <tr><th scope="row">Text on tinted panels (lowest)</th><td>14.03:1</td><td>11.21:1</td><td>21.00:1</td><td>21.00:1</td></tr>
+                  <tr><th scope="row">Links on tinted panels (lowest)</th><td>6.37:1</td><td>6.27:1</td><td>12.69:1</td><td>19.66:1</td></tr>
+                  <tr><th scope="row">Dark text on yellow marker</th><td>12.44:1</td><td>12.44:1</td><td>14.73:1</td><td>19.66:1</td></tr>
+                  <tr><th scope="row">Focus ring on page</th><td>7.69:1</td><td>13.23:1</td><td>12.69:1</td><td>13.65:1</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="prose">Every text pair clears AA. Most clear AAA (7:1) as well.</p>
+          </section>
+
+          <section id="testing" aria-labelledby="testing-title">
+            <h2 id="testing-title">Test log</h2>
+            <p class="prose">Automated tools catch only some problems, so the plan mixes tools with hands-on checks. Status shows what has been done so far.</p>
+            <!-- TODO: after running each tool, replace "Pending" with the date and result (for example "Pass, 0 errors"). -->
+            <div class="table-wrap" role="region" aria-labelledby="testing-caption" tabindex="0">
+              <table>
+                <caption id="testing-caption">Accessibility test log</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Check</th>
+                    <th scope="col">How</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">Color contrast</th><td>WCAG ratios calculated for every text and background pair (table above)</td><td>Done: all pass AA</td></tr>
+                  <tr><th scope="row">Links, ids, headings</th><td>Script checks that internal links and fragments resolve, ids are unique, each page has <code>lang</code>, a title, and one <code>h1</code></td><td>Done</td></tr>
+                  <tr><th scope="row">HTML validity</th><td><a href="https://validator.w3.org/">W3C Markup Validator</a> on every page</td><td>Pending</td></tr>
+                  <tr><th scope="row">Automated audits</th><td><a href="https://wave.webaim.org/">WAVE</a>, Silktide, and Lighthouse</td><td>Pending</td></tr>
+                  <tr><th scope="row">Keyboard only</th><td>Tab through every page; open and close the how-to sections and myths without a mouse</td><td>Pending</td></tr>
+                  <tr><th scope="row">Screen reader</th><td>VoiceOver or NVDA: landmarks, headings, expandable sections, and form controls</td><td>Pending</td></tr>
+                  <tr><th scope="row">Responsive and zoom</th><td>320, 768, and 1280 pixels wide, plus 200% and 400% zoom</td><td>Pending</td></tr>
+                  <tr><th scope="row">User settings</th><td>Dark mode, increased contrast, and reduced motion switched on at the system level</td><td>Pending</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <div class="next-links">
+            <a class="btn btn--ghost" href="how.html">Back: How to build it</a>
+            <a class="btn" href="index.html">Back to home</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p><strong>Built For All</strong> is a class project about universal design for the web.</p>
+      <p>Type: Atkinson Hyperlegible and Bricolage Grotesque, via Google Fonts.</p>
+      <p><a href="#top">Back to top</a></p>
+    </div>
+  </footer>
+</body>
+</html>
